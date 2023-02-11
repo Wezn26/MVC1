@@ -1,6 +1,8 @@
 <?php
 namespace App\Router;
 
+use App\View\View;
+
 class Router
 {
     protected $routes = [];
@@ -35,20 +37,20 @@ class Router
     public function run() {
         if ($this->match()) {
             $path = 'App\Controllers\\' .
-                    ucfirst($this->params['controller'], 'Controller');
+                ucfirst($this->params['controller']) . 'Controller';
             if (class_exists($path)) {
                 $action = $this->params['action'] . 'Action';
                 if (method_exists($path, $action)) {
                     $controller = new $path($this->params);
                     $controller->$action();
                 } else {
-                    echo 'Error 404';
+                    View::errorcode(404);                   
                 }
             } else {
-                echo 'Error 403';
+                View::errorcode(403);
             }
         } else {
-            echo 'Error402';
+            View::errorcode(402);
         }
     }
     

@@ -1,7 +1,7 @@
 <?php
 return [
    '' => [
-       'controller' => 'main',
+       'controller' => 'index',
        'action' => 'index'
    ],
     
