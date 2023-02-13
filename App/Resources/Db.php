@@ -27,10 +27,16 @@ class Db
         return $stmt;
     }
     
-    public function getDataInClasses(string $sql, array $data = [], $class) 
+    public function getDataInClasses($class, string $sql, array $data = []) 
     {
         $result = $this->query($sql, $data);
         return $result->fetchAll(PDO::FETCH_CLASS, $class);
+    }
+    
+    public function getQuery($sql) 
+    {
+        $stmt = $this->dbh->prepare($sql);
+        return $stmt->execute();
     }
     
     public function getLastId() 
