@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Resources\Db;
+use App\View\View;
 
 abstract class Model
 {
@@ -43,6 +44,43 @@ abstract class Model
     public function isNew(): bool
     {
         return empty($this->id);
+    }
+    
+    /*
+     * функция вставляет новую запись
+     * */
+    public function insert() 
+    {
+        if (!$this->isNew()) {
+            return;
+        }
+        
+        $this->title   = $title;
+        $this->image   = $image;
+        $this->content = $content;
+        $this->author  = $author;
+        $this->data    = $data;
+        
+        $sql = 'INSERT INTO ' . static::TABLE . '
+                    (title, image, content, author, data)
+                    VALUES
+                    (:title, :image, :content, :author, :data)
+               ';
+        $data = [
+            'title'   => $this->title,
+            'image'   => $this->image,
+            'content' => $this->content,
+            'author'  => $this->author,
+            'data'    => $this->data
+        ];
+        
+        $db = Db::give();
+        $result = $db->query($sql, $data);
+        $this->id = $db->getLastId();
+        
+        if (!$result) {
+            View::errorcode(1);
+        }
     }
 }
 

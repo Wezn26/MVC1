@@ -3,12 +3,8 @@ return [
    '' => [
        'controller' => 'index',
        'action' => 'index'
-   ],
-    
-   'contacts' => [
-       'controller' => 'contacts',
-       'action' => 'contact'
-   ],
+   ], 
+   
    
    'account/login' => [
        'controller' => 'account',
@@ -20,8 +16,5 @@ return [
        'action' => 'register'
    ],
    
-   'news/show' => [
-       'controller' => 'news',
-       'action' => 'show'
-   ], 
+   
 ];
