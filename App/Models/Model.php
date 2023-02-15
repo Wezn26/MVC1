@@ -74,10 +74,65 @@ abstract class Model
        
        $db = Db::give();
        $result = $db->query($sql, $values);
+       $this->id = $db->getLastId();
        
        if (!$result) {
            View::errorcode(1);
        }
     }
+    
+    /*
+     * Функция обновляет существующую запись в таблице
+     * */
+    public function update() 
+    {
+        $columns = [];
+        $values = [];
+        
+        foreach ($this as $key => $value) {
+            $values[':' . $key] = $value;
+            if ('id' == $key) {
+                continue;
+            }
+            
+            $columns[] = $key . '=:' . $key;
+            $sql = 'UPDATE ' . static::TABLE . 
+                   ' SET '
+                   . implode(',', $columns) .
+                   'WHERE id=:id';
+            $db = new Db();
+            $result = $db->query($sql, $values);
+            if (!$result) {
+                View::errorcode(2);
+            }
+        }
+    }
+    
+    /*
+     * Функция сохраняет запись в таблицу
+     * */
+    public function save() 
+    {
+        if (isset($this->id)) {
+            $this->update();
+        } else {
+            $this->insert();
+        }
+    }
+    
+    /*
+     * Функция удаляет запись из таблицы
+     * */
+    public function delete($id) 
+    {
+        $sql = 'DELETE FROM ' . static::TABLE . ' WHERE id=:id';
+        $data = [':id' => $this->id];
+        $db = new Db();
+        $result = $db->query($sql, $data);
+        if (!$result) {
+            View::errorcode(3);
+        }
+    }
+    
 }
 

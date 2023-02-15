@@ -11,7 +11,7 @@ class TestController extends Controller
         $test = new Test();
         $test->login = $_POST['login'];
         $test->password = $_POST['password'];
-        $test->insert();
+        $test->save();
         
         $this->view->redirect('/');
     }

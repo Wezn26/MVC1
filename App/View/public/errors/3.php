@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NSERT ERROR PAGE 1</title>
+    <title>DELETE ERROR PAGE</title>
 </head>
 
 <body>
-  	<h1 style="color: red;">INSERT ERROR PAGE 1</h1>
-  	<h2 style="color: orange;">Error Insert Data in Table!!!</h2>
+  	<h1 style="color: red;">DELETE ERROR PAGE </h1>
+  	<h2 style="color: orange;">Error Update Values in Table!!!</h2>
 </body>
 
 </html>
