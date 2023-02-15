@@ -20,23 +20,23 @@ class Db
         $stmt = $this->dbh->prepare($sql);
         if (!empty($data)) {
             foreach ($data as $key => $value) {
-                $stmt->bindValue(':' . $key, $value);
+                $stmt->bindValue($key, $value);
             }
         }
         $stmt->execute();
         return $stmt;
     }
     
-    public function getDataInClasses($class, string $sql, array $data = []) 
+    public function getDataInArray(string $sql, array $data = []) 
     {
         $result = $this->query($sql, $data);
-        return $result->fetchAll(PDO::FETCH_CLASS, $class);
+        return $result->fetchAll(PDO::FETCH_ASSOC);
     }
     
-    public function getQuery($sql) 
+    public function getQuery($sql, $data = []) 
     {
         $stmt = $this->dbh->prepare($sql);
-        return $stmt->execute();
+        return $stmt->execute($data);
     }
     
     public function getLastId() 

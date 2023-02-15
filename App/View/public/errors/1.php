@@ -13,4 +13,4 @@
   	<h2 style="color: orange;">Error Insert Data in Database!!!</h2>
 </body>
 
-</html
+</html>

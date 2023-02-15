@@ -14,12 +14,11 @@ abstract class Model
      * Функция findAll() возвращает все записи из таблицы
      * return @array
      * */
-    public static function findAll($param) : array
+    public static function findAll() : array
     {
-        $db = Db::give();
-        $class = static::class;
+        $db = Db::give();        
         $sql = 'SELECT * FROM ' . static::TABLE;
-        return $db->getDataInClasses($class, $sql, []);
+        return $db->getDataInArray($sql, []);
     }
     
     /*
@@ -29,11 +28,10 @@ abstract class Model
      * */
     public static function findById($id)
     {
-        $db = Db::give();
-        $class = static::class;
+        $db = Db::give();       
         $sql = 'SELECT * FROM ' . static::TABLE . ' WHERE id=:id';
-        $data = ['id' => $id];
-        $value = $db->getDataInClasses($class, $sql, $data);
+        $data = [':id' => $id];
+        $value = $db->getDataInArray($sql, $data);
         return $value ? $value[0] : null;
     }
     
@@ -55,32 +53,31 @@ abstract class Model
             return;
         }
         
-        $this->title   = $title;
-        $this->image   = $image;
-        $this->content = $content;
-        $this->author  = $author;
-        $this->data    = $data;
+        $columns = [];
+        $values = [];
+        
+        foreach ($this as $key => $value) {
+            if ('id' == $key) {
+                continue;
+            }
+            
+            $columns[] = $key;
+            $values[':' . $key] = $value;
+        }
         
         $sql = 'INSERT INTO ' . static::TABLE . '
-                    (title, image, content, author, data)
-                    VALUES
-                    (:title, :image, :content, :author, :data)
-               ';
-        $data = [
-            'title'   => $this->title,
-            'image'   => $this->image,
-            'content' => $this->content,
-            'author'  => $this->author,
-            'data'    => $this->data
-        ];
+            (' . implode(',', $columns) . ')
+            VALUES
+            (' . implode(',', array_keys($values)) . ')
+         ';
         
-        $db = Db::give();
-        $result = $db->query($sql, $data);
-        $this->id = $db->getLastId();
-        
-        if (!$result) {
-            View::errorcode(1);
-        }
+       
+       $db = Db::give();
+       $result = $db->query($sql, $values);
+       
+       if (!$result) {
+           View::errorcode(1);
+       }
     }
 }
 

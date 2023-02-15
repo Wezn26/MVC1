@@ -5,7 +5,7 @@ trait Singleton
 {
     protected static $instance = null;
     
-    public function give() 
+    public static function give() 
     {
         if (null === static::$instance) {
             return static::$instance = new static;
