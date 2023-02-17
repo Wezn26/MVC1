@@ -9,6 +9,11 @@ return [
         'controller' => 'test',
         'action' => 'test'
     ],
+    
+    'admin' => [
+        'controller' => 'admin',
+        'action' => 'check'
+    ],
    
    'account/login' => [
        'controller' => 'account',
@@ -19,6 +24,11 @@ return [
        'controller' => 'account',
        'action' => 'register'
    ],
+    
+    'account/admin' => [
+        'controller' => 'account',
+        'action' => 'admin'
+    ],
    
    
 ];

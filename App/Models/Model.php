@@ -13,7 +13,7 @@ abstract class Model
     /*
      * @return clean insert data in inputs
      * */
-    public function cleanData($str) 
+    public static function cleanData($str) 
     {
         return strip_tags(trim($str));
     }

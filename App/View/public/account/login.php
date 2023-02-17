@@ -1,5 +1,5 @@
 <h3>Enter</h3>
-<form action="/test" method="POST">
+<form action="/admin" method="POST">
     <p>login</p>
     <p><input type="text" name="login"></p>
     <p>password</p>
