@@ -11,6 +11,14 @@ abstract class Model
     public $id;
     
     /*
+     * @return clean insert data in inputs
+     * */
+    public function cleanData($str) 
+    {
+        return strip_tags(trim($str));
+    }
+    
+    /*
      * Функция findAll() возвращает все записи из таблицы
      * return @array
      * */
