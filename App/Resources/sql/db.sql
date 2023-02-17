@@ -6,3 +6,9 @@ CREATE TABLE `news` (
 	`author`	TEXT,
 	`date`	TEXT
 );
+
+CREATE TABLE `admin` (
+	`id`	INTEGER PRIMARY KEY AUTOINCREMENT,
+	`login`	TEXT,
+	`password`	TEXT
+);
