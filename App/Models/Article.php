@@ -5,6 +5,7 @@ class Article extends Model
 {
     public $title;
     public $image;
+    public $path;
     public $content;
     public $author;
     public $date;
