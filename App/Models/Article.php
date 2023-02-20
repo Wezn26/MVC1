@@ -19,5 +19,16 @@ class Article extends Model
     {
         return array_reverse(array_slice(static::findAll(), -$num));
     }
+    
+    public static function getAllImages() : array
+    {
+        return static::findAll();
+    }
+    
+    public function send($nameImg, $file) 
+    {
+        ;
+    }
+    
 }
 

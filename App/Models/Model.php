@@ -142,5 +142,41 @@ abstract class Model
         }
     }
     
+    /**
+     * Првоверяет допустимый тип изображения
+     * @return bool
+     */
+    
+    public function checkTypefile($mimeType) : bool
+    {
+        $mediaTypes = ['image/gif', 'image/svg+xml', 'image/jpeg', 'image/png'];
+        return in_array($mimeType, $mediaTypes);
+    }
+    
+    /**
+     * Функция загружает файл изображения на сервер     
+     */
+    
+    public function fileUpload($file)
+    {
+        $file = $_FILES['file'];
+        if (empty($file) && 0!= $file['error'] && !$this->checkTypefile($file['type'])) {
+            return false;
+        }
+        
+        if (is_uploaded_file($file['tmp_name'])) {
+            $res = move_uploaded_file($file['tmp_name'],
+                __DIR__ . './../View/public/images/' . $file['name']);
+            
+            if ($res) {
+                return '/images/' . $file['name'];
+            } else {
+                return false;
+            }
+        }
+        
+        return false;
+    }
+    
 }
 
