@@ -1,6 +1,6 @@
 <h1>Authorization</h1>
 <h3>Open Admin Panel!!!</h3>
-<form action="/account/admin" method="POST">
+<form action="/admin" method="POST">
     <p>login</p>
     <p><input type="text" name="login"></p>
     <p>password</p>

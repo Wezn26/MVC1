@@ -8,7 +8,6 @@ class Article extends Model
 {
     protected const TABLE = 'news';
     public $title;
-    public $image;
     public $path;
     public $content;
     public $author;
@@ -25,34 +24,29 @@ class Article extends Model
     }    
    
     
-    public function send($name, $file)
+    public function send($file)
     {
-        $name = $_POST['name'];
+        
         $file = $_POST['file'];
         
-        if (empty($name) && empty($file)) {
+        if (empty($file)) {
             return;
-        }
+        }        
         
-        $this->name = strip_tags($name);
         $res = $this->fileUpload('file');
         
         if (false != $res) {
             $this->path = (string)$res;
         } else {
             View::errorcode(6);
-        }       
-        
+        }         
         
         $sql = 'INSERT INTO ' . static::TABLE . '
-                (image, path)
+                (path)
                 VALUES
-                (:image, :path)
+                (:path)
                 ';
-        $data = [
-            ':image' => $this->image,
-            ':path' => $this->path
-        ];
+        $data = [ ':path' => $this->path ];
         
         $db = Db::give();
         $db->query($sql, $data);

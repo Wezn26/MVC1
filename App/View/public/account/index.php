@@ -2,7 +2,7 @@
 
 <p align="right"><a href="./?ctrl=Admin">Админ Панель</a></p>
     <hr>
-    <?php foreach ($articles as $article): ?>
+    <?php foreach ($news as $article): ?>
         <h2>
             <a href="./?ctrl=Article&id=<?= $article->id; ?>">
                 <?= $article->title; ?>

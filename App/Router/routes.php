@@ -1,7 +1,7 @@
 <?php
 return [
    '' => [
-       'controller' => 'index',
+       'controller' => 'account',
        'action' => 'index'
    ], 
    
@@ -9,10 +9,23 @@ return [
         'controller' => 'test',
         'action' => 'test'
     ],
+    'test/index' => [
+        'controller' => 'test',
+        'action' => 'index'
+    ],
+    
+    'test/article' => [
+        'controller' => 'test',
+        'action' => 'article'
+    ],
     
     'admin' => [
         'controller' => 'admin',
         'action' => 'check'
+    ],
+    'admin/index' => [
+        'controller' => 'admin',
+        'action' => 'index'
     ],
    
    'account/login' => [
