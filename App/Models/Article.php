@@ -1,8 +1,12 @@
 <?php
 namespace App\Models;
 
+use App\View\View;
+use App\Resources\Db;
+
 class Article extends Model
 {
+    protected const TABLE = 'news';
     public $title;
     public $image;
     public $path;
@@ -18,17 +22,44 @@ class Article extends Model
     public static function findLastArticle(int $num) : array 
     {
         return array_reverse(array_slice(static::findAll(), -$num));
-    }
+    }    
+   
     
-    public static function getAllImages() : array
+    public function send($name, $file)
     {
-        return static::findAll();
-    }
+        $name = $_POST['name'];
+        $file = $_POST['file'];
+        
+        if (empty($name) && empty($file)) {
+            return;
+        }
+        
+        $this->name = strip_tags($name);
+        $res = $this->fileUpload('file');
+        
+        if (false != $res) {
+            $this->path = (string)$res;
+        } else {
+            View::errorcode(6);
+        }       
+        
+        
+        $sql = 'INSERT INTO ' . static::TABLE . '
+                (image, path)
+                VALUES
+                (:image, :path)
+                ';
+        $data = [
+            ':image' => $this->image,
+            ':path' => $this->path
+        ];
+        
+        $db = Db::give();
+        $db->query($sql, $data);
+        
+    }  
     
-    public function send($nameImg, $file) 
-    {
-        ;
-    }
+    
     
 }
 

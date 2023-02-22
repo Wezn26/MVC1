@@ -1,9 +1,18 @@
 <p>Main Page</p>
 
-<?php foreach ($content as $value) : ?>
-    <h3><?php echo $value['login']; ?></h3>
-    <h3><?php echo $value['password']; ?></h3>
+<p align="right"><a href="./?ctrl=Admin">Админ Панель</a></p>
     <hr>
-<?php endforeach; ?>
+    <?php foreach ($articles as $article): ?>
+        <h2>
+            <a href="./?ctrl=Article&id=<?= $article->id; ?>">
+                <?= $article->title; ?>
+            </a>
+        </h2>
 
-<!-- <p><?php var_dump($this->route['controller']); ?></p> -->
+        <section>
+            <?= $article->content; ?>
+        </section>
+
+        <p>Автор: <b><?= $article->author; ?></b></p>
+    <?php endforeach; ?>
+    

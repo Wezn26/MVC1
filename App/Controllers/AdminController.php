@@ -8,7 +8,7 @@ class AdminController extends Controller
 {
     public function checkAction() 
     {
-        //var_dump($_POST);die();
+        var_dump($_POST);die();
         if (Admin::isAdmin($_POST)) {
             $this->view->redirect('/account/admin');
         } else {
